@@ -46,12 +46,12 @@ public class UserService {
     }
 
     public UserResponseDto getUserById(Long id) {
-        User user =userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with ID: " + id));
+        User user =userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         return mapToResponseDto(user);
     }
 
     public UserResponseDto updateUser(Long id, UserUpdateDto userDto) {
-        User existingUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with ID: " + id));
+        User existingUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
         if (userDto.username() != null && !userDto.username().equals(existingUser.getUsername())) {
             if(userRepository.existsByUsername(userDto.username())) {
                 throw new UserAlreadyExistsException("User name is already taken");}
@@ -72,7 +72,7 @@ public class UserService {
         }
         public void deleteUser(Long id) {
             if (!userRepository.existsById(id)) {
-                throw new UserNotFoundException("User not found with ID: " + id);
+                throw new UserNotFoundException(id);
             }
             userRepository.deleteById(id);
         }

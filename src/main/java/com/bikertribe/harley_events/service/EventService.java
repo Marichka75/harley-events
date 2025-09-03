@@ -14,9 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class EventService {
     private final EventRepository eventRepository;
@@ -43,12 +40,12 @@ public class EventService {
     }
 
     public EventResponseDto getEventById(Long id) {
-        Event event = eventRepository.findById(id).orElseThrow(() -> new EventNotFoundException("Event not found with ID: " + id));
+        Event event = eventRepository.findById(id).orElseThrow(() -> new EventNotFoundException(id));
         return  mapToResponseDto(event);
     }
 
     public EventResponseDto updateEvent(long id, EventUpdateDto eventDto) {
-        Event existingEvent = eventRepository.findById(id).orElseThrow(() -> new EventNotFoundException("Event not found with ID: " + id));
+        Event existingEvent = eventRepository.findById(id).orElseThrow(() -> new EventNotFoundException(id));
 
         existingEvent.setName(eventDto.name());
         existingEvent.setDescription(eventDto.description());
@@ -61,14 +58,14 @@ public class EventService {
 
     public void deleteEvent(Long id) {
         if (!eventRepository.existsById(id)) {
-            throw new EventNotFoundException("Event not found with ID: " + id);
+            throw new EventNotFoundException(id);
         }
         eventRepository.deleteById(id);
     }
 
     public EventResponseDto subscribeUserToEvent(long eventId, Long userId) {
-        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException("Event not found with ID: " + eventId));
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException(eventId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
 
         user.addSubscribedEvent(event);
         userRepository.save(user);
@@ -77,8 +74,8 @@ public class EventService {
     }
 
     public EventResponseDto unsubscribeUserFromEvent(Long eventId, long userId) {
-        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException("Event not found with ID: " + eventId));
-        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found with ID: " + userId));
+        Event event = eventRepository.findById(eventId).orElseThrow(() -> new EventNotFoundException(eventId));
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException(userId));
 
         user.removeSubscribedEvent(event);
         userRepository.save(user);
