@@ -1,11 +1,8 @@
 package com.bikertribe.harley_events.exception;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(HttpStatus.NOT_FOUND)
 public class EventNotFoundException extends RuntimeException {
-    public EventNotFoundException(String message) {
-        super(message);
+    public EventNotFoundException(Long id) {
+        super("Event not found with id: " + id);
+
     }
 }
