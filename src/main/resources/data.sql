@@ -9,10 +9,10 @@ INSERT INTO events (name, description, date_time, location) VALUES
 ('Canary Islands Volcano Ride', 'A thrilling ride around the volcanoes of Tenerife, followed by a local barbecue.', '2025-12-08 09:00:00', 'Santa Cruz de Tenerife');
 
 INSERT INTO users (username, email, password, role) VALUES
-('harley_rider_1', 'rider1@example.com', '{bcrypt}$2a$10$y6m41o7cT6o8Z6mPjM5xmu4Z.q5P2Y6jQ.mKzR5M7jN2u2L4Q5z1K', 'RIDER'),
-('admin_user', 'admin@example.com', '{bcrypt}$2a$10$y6m41o7cT6o8Z6mPjM5xmu4Z.q5P2Y6jQ.mKzR5M7jN2u2L4Q5z1K', 'ADMIN'),
-('biker_dave', 'dave@example.com', '{bcrypt}$2a$10$y6m41o7cT6o8Z6mPjM5xmu4Z.q5P2Y6jQ.mKzR5M7jN2u2L4Q5z1K', 'RIDER'),
-('spain_biker', 'spainbiker@example.com', '{bcrypt}$2a$10$y6m41o7cT6o8Z6mPjM5xmu4Z.q5P2Y6jQ.mKzR5M7jN2u2L4Q5z1K', 'RIDER');
+('harley_rider_1', 'rider1@bikertribe.com', '{bcrypt}$2a$10$y6m41o7cT6o8Z6mPjM5xmu4Z.q5P2Y6jQ.mKzR5M7jN2u2L4Q5z1K', 'RIDER'),
+('admin_user', 'admin@bikertribe.com', '{bcrypt}$2a$10$y6m41o7cT6o8Z6mPjM5xmu4Z.q5P2Y6jQ.mKzR5M7jN2u2L4Q5z1K', 'ADMIN'),
+('biker_dave', 'dave@bikertribe.com', '{bcrypt}$2a$10$y6m41o7cT6o8Z6mPjM5xmu4Z.q5P2Y6jQ.mKzR5M7jN2u2L4Q5z1K', 'RIDER'),
+('spain_biker', 'spainbiker@bikertribe.com', '{bcrypt}$2a$10$y6m41o7cT6o8Z6mPjM5xmu4Z.q5P2Y6jQ.mKzR5M7jN2u2L4Q5z1K', 'RIDER');
 
 INSERT INTO user_events (user_id, event_id) VALUES
 (1, 1),

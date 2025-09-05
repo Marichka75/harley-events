@@ -16,56 +16,50 @@ import java.util.List;
 public class EventController {
     private final EventService eventService;
 
-    public  EventController(EventService eventService) {
+    public EventController(EventService eventService) {
         this.eventService = eventService;
     }
 
     @GetMapping
     @PreAuthorize("hasRole('RIDER') or hasRole('ADMIN')")
     public ResponseEntity<List<EventResponseDto>> getAllEvents() {
-        List<EventResponseDto> events = eventService.getAllEvents();
-        return new ResponseEntity<>(events, HttpStatus.OK);
+        return ResponseEntity.ok(eventService.getAllEvents());
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('RIDER') or hasRole('ADMIN')")
     public ResponseEntity<EventResponseDto> getEventById(@PathVariable Long id) {
-        EventResponseDto event = eventService.getEventById(id);
-        return new ResponseEntity<>(event, HttpStatus.OK);
-}
+        return ResponseEntity.ok(eventService.getEventById(id));
+    }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<EventResponseDto> createEvent(@RequestBody EventCreationDto eventDto) {
-        EventResponseDto createdEvent = eventService.createEvent(eventDto);
-        return  new ResponseEntity<>(createdEvent, HttpStatus.CREATED);
+        return new ResponseEntity<>(eventService.createEvent(eventDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<EventResponseDto> updateEvent(@PathVariable Long id, @RequestBody EventUpdateDto eventDto) {
-        EventResponseDto updatedEvent =eventService.updateEvent(id, eventDto);
-        return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
+        return ResponseEntity.ok(eventService.updateEvent(id, eventDto));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> deleteEvent(@PathVariable long id) {
+    public ResponseEntity<String> deleteEvent(@PathVariable long id) {
         eventService.deleteEvent(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.ok("Event removed successfully");
     }
 
     @PutMapping("/{eventId}/subscribe/{userId}")
     @PreAuthorize("hasRole('RIDER')")
     public ResponseEntity<EventResponseDto> subscribeUserToEvent(@PathVariable Long eventId, @PathVariable Long userId) {
-        EventResponseDto updatedEvent = eventService.subscribeUserToEvent(eventId, userId);
-        return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
+        return ResponseEntity.ok(eventService.subscribeUserToEvent(eventId, userId));
     }
 
     @PutMapping("/{eventId}/unsubscribe/{userId}")
     @PreAuthorize("hasRole('RIDER')")
     public ResponseEntity<EventResponseDto> unsubscribeUserFromEvent(@PathVariable long eventId, @PathVariable Long userId) {
-        EventResponseDto updatedEvent = eventService.unsubscribeUserFromEvent(eventId, userId);
-        return new ResponseEntity<>(updatedEvent, HttpStatus.OK);
+        return ResponseEntity.ok(eventService.unsubscribeUserFromEvent(eventId, userId));
     }
 }
