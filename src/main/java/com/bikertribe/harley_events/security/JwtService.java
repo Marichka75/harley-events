@@ -10,13 +10,11 @@ import org.springframework.stereotype.Service;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 public class JwtService {
 
-    private static final String SECRET_KEY = "my-super-secret-key-that-is-very-long-for-jwt-encoding";
+    private static final String SECRET_KEY = "MzJmZmY0ZDYtNzMyYS00ZDYzLTg4ZTYtYjM4NTVmNDhjN2M3N2RkYjE5YjQ=";
 
     private static final long EXPIRATION_TIME = 1000 * 60 * 60;
 
